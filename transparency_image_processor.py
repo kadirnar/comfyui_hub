@@ -1,11 +1,17 @@
-class ImageProcessingWithTransparency:
+import os
+from PIL import Image, ImageOps
+import numpy as np
+import torch
+import folder_paths
+
+class TransparentImageProcessor:
     """
-    Image processing node with transparency handling.
+    A node for processing images with optional transparency handling.
 
     Class methods
     -------------
     INPUT_TYPES (dict): 
-        Specify the input parameters of the node.
+        Specifies input parameters of the node.
 
     Attributes
     ----------
@@ -16,58 +22,67 @@ class ImageProcessingWithTransparency:
     CATEGORY (`str`):
         The category the node should appear in the UI.
     """
-    def __init__(self):
-        pass
-    
+
     @classmethod
-    def INPUT_TYPES(cls):
-        """
-            Return a dictionary which contains config for all input fields.
-        """
+    def INPUT_TYPES(s):
+        input_dir = folder_paths.get_input_directory()
+        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
         return {
             "required": {
-                "image_path": ("STRING", {
-                    "multiline": False,
-                    "default": ""
-                }),
-                "is_transparent": (["True", "False"],),
+                "image": (sorted(files), {"image_upload": True}),
+                "is_transparent": (["True", "False"], {"checkbox": True, "default": "False"})
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "MASK", "IMAGE")
+    RETURN_TYPES = ("IMAGE",)
     FUNCTION = "process_image"
-    CATEGORY = "Image Processing"
+    CATEGORY = "comfyui-image-utils"
 
-    def process_image(self, image_path, is_transparent):
-        from PIL import Image, ImageOps
-        import numpy as np
-        import torch
+    def process_image(self, image, is_transparent="False"):
+        """
+        Loads and processes an image with optional transparency handling.
 
+        Parameters
+        ----------
+        image : IMAGE
+            The image to be processed.
+        is_transparent : str, optional
+            "True" if transparency processing is enabled, "False" otherwise.
+            Default is "False".
+
+        Returns
+        -------
+        tuple
+            A tuple containing the processed image tensor.
+        """
+        image_path = folder_paths.get_annotated_filepath(image)
         img = Image.open(image_path)
         img = ImageOps.exif_transpose(img)
-        image = img.convert("RGB")
-        image_np = np.array(image).astype(np.float32) / 255.0
+        
+        # Convert to RGBA if transparency processing is active and an alpha channel exists
+        if is_transparent == "True" and 'A' in img.getbands():
+            img = img.convert('RGBA')
+            alpha = np.array(img.split()[-1]).astype(np.float32) / 255.0  # Extract alpha channel
+            img = img.convert('RGB')  # Remove alpha channel
+        else:
+            img = img.convert('RGB')
+            alpha = 1.0  # Full opacity
+
+        image_np = np.array(img).astype(np.float32) / 255.0
         image_tensor = torch.from_numpy(image_np)[None,]
 
-        if is_transparent == "True" and 'A' in img.getbands():
-            alpha = np.array(img.getchannel('A')).astype(np.float32) / 255.0
-            alpha_tensor = torch.from_numpy(alpha)
-            mask = 1.0 - alpha_tensor
+        # Apply transparency processing
+        if is_transparent == "True":
+            for c in range(3):  # For each RGB channel
+                image_tensor[0, :, :, c] *= alpha
 
-            smooth_image = image_tensor.detach().clone()
-            for c in range(3):  # RGB channels
-                smooth_image[0, :, :, c] *= alpha_tensor
-            return (image_tensor, mask, smooth_image)
-        else:
-            mask = torch.zeros((image_tensor.shape[2], image_tensor.shape[3]), dtype=torch.float32)
-            return (image_tensor, mask, image_tensor)
+        return (image_tensor,)
 
-# Node class mappings
 NODE_CLASS_MAPPINGS = {
-    "ImageProcessingWithTransparency": ImageProcessingWithTransparency
+    "ImageProcessingWithTransparency": TransparentImageProcessor
 }
 
 # Node display name mappings
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ImageProcessingWithTransparency": "Image Processing with Transparency"
+    "ImageProcessingWithTransparency": "Transparent Image Processor"
 }
