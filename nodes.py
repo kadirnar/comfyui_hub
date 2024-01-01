@@ -6,8 +6,12 @@ import folder_paths
 import torch
 import numpy as np
 from torchvision import transforms
-from noisehub.latent_math_encoder import linear_encoder
-from noisehub.latent_noise_generator import gaussian_latent_noise
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+
+from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent_math_encoder import linear_encoder
+from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent_noise_generator import gaussian_latent_noise
 
 class MathEncode:
 	"""
@@ -26,7 +30,7 @@ class MathEncode:
 		}
 	RETURN_TYPES = ("LATENT",)
 	FUNCTION = "encode"
-	CATEGORY = "comfyui_helpers"
+	CATEGORY = "comfyui_helpers/noisehub"
 	TITLE = "MathEncoder"
 
 	def encode(self, pixels, latent_ver, mode):
@@ -64,7 +68,7 @@ class LatentGaussianNoise:
 		}
 	RETURN_TYPES = ("LATENT",)
 	FUNCTION = "generate"
-	CATEGORY = "comfyui_helpers"
+	CATEGORY = "comfyui_helpers/noisehub"
 	TITLE = "GaussianNoise(Latent)"
 
 	def generate(self, latent_ver, width, height, factor, null, batch_size, scale, random, seed):
@@ -120,7 +124,7 @@ class ImageLoaderAndProcessor:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "load_and_process_image"
-    CATEGORY = "comfyui_helpers"
+    CATEGORY = "comfyui_helpers/image"
     TITLE = "LoadImageandProcess"
 
     def load_and_process_image(self, image, is_transparent="False"):
