@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import folder_paths
 
-class TransparentImageProcessor:
+class ImageLoaderAndProcessor:
     """
     A node for processing images with optional transparency handling.
 
@@ -35,10 +35,10 @@ class TransparentImageProcessor:
         }
 
     RETURN_TYPES = ("IMAGE",)
-    FUNCTION = "process_image"
+    FUNCTION = "load_and_process_image"
     CATEGORY = "comfyui-image-utils"
 
-    def process_image(self, image, is_transparent="False"):
+    def load_and_process_image(self, image, is_transparent="False"):
         """
         Loads and processes an image with optional transparency handling.
 
@@ -79,10 +79,10 @@ class TransparentImageProcessor:
         return (image_tensor,)
 
 NODE_CLASS_MAPPINGS = {
-    "ImageProcessingWithTransparency": TransparentImageProcessor
+    "ImageProcessingWithTransparency": ImageLoaderAndProcessor
 }
 
 # Node display name mappings
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ImageProcessingWithTransparency": "Transparent Image Processor"
+    "ImageProcessingWithTransparency": "ImageLoaderAndProcessor"
 }

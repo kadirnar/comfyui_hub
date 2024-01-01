@@ -1,3 +1,3 @@
-from .transparency_image_processor import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+from .image_loader_processor import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
