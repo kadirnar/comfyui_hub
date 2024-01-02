@@ -13,6 +13,7 @@ from ComfyUI.custom_nodes.comfyui_helpers.noisehub.advanced_noise.node import Ma
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.perlin_noise.node import NoisyLatentPerlin
 from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent2rgb.node import LatentToRGB
+from ComfyUI.custom_nodes.comfyui_helpers.noisehub.circular_ksampler.node import CircularVAEDecode,CustomKSamplerAdvancedTile
 
 
 NODE_CLASS_MAPPINGS = {
@@ -37,7 +38,8 @@ NODE_CLASS_MAPPINGS = {
 	"JDC_ImageLoader": LoadImagePath,
 	"JDC_ImageLoaderMeta": LoadImagePathWithMetadata,
 	"LatentToRGB": LatentToRGB,
-
+	"CircularVAEDecode": CircularVAEDecode,
+	"CustomKSamplerAdvancedTile": CustomKSamplerAdvancedTile,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -62,5 +64,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 	"JDC_ImageLoader": "LoadImagePath",
 	"JDC_ImageLoaderMeta": "LoadImagePathMeta",
 	"LatentToRGB": "Latent2RGB",
+	"CircularVAEDecode": "CircularVAEDecode",
+	"CustomKSamplerAdvancedTile": "CustomKSamplerAdvancedTile",
  
 }
