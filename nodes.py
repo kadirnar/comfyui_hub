@@ -12,8 +12,7 @@ from ComfyUI.custom_nodes.comfyui_helpers.noisehub.plasma_noise.node import (
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.advanced_noise.node import MathEncode, LatentGaussianNoise
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.perlin_noise.node import NoisyLatentPerlin
 from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor
-
-
+from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent2rgb.node import LatentToRGB
 
 
 NODE_CLASS_MAPPINGS = {
@@ -36,7 +35,9 @@ NODE_CLASS_MAPPINGS = {
 	"JDC_BlendImages": BlendImages,
 	"JDC_GaussianBlur": GaussianBlur,
 	"JDC_ImageLoader": LoadImagePath,
-	"JDC_ImageLoaderMeta": LoadImagePathWithMetadata
+	"JDC_ImageLoaderMeta": LoadImagePathWithMetadata,
+	"LatentToRGB": LatentToRGB,
+
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -44,20 +45,22 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LatentGaussianNoise": LatentGaussianNoise.TITLE,
     "NoisyLatentPerlin": NoisyLatentPerlin.TITLE,
     "ImageLoaderAndProcessor": ImageLoaderAndProcessor.TITLE,
-	"JDC_Plasma": "Plasma Noise",
-	"JDC_RandNoise": "Random Noise",
-	"JDC_GreyNoise": "Greyscale Noise",
-	"JDC_PinkNoise": "Pink Noise",
-	"JDC_BrownNoise": "Brown Noise",
-	"JDC_PlasmaSampler": "Plasma KSampler",
-	"JDC_PowerImage": "Image To The Power Of",
-	"JDC_Contrast": "Brightness & Contrast",
-	"JDC_Greyscale": "RGB to Greyscale",
-	"JDC_EqualizeGrey": "Equalize Histogram",
+	"JDC_Plasma": "PlasmaNoise",
+	"JDC_RandNoise": "RandomNoise",
+	"JDC_GreyNoise": "GreyscaleNoise",
+	"JDC_PinkNoise": "PinkNoise",
+	"JDC_BrownNoise": "BrownNoise",
+	"JDC_PlasmaSampler": "PlasmaKSampler",
+	"JDC_PowerImage": "Image2Power",
+	"JDC_Contrast": "Brightness_Contrast",
+	"JDC_Greyscale": "RGB2Greyscale",
+	"JDC_EqualizeGrey": "EqualizeHistogram",
 	"JDC_AutoContrast": "AutoContrast",
-	"JDC_ResizeFactor": "Resize Image by Factor",
-	"JDC_BlendImages": "Blend Images",
-	"JDC_GaussianBlur": "Gaussian Blur",
-	"JDC_ImageLoader": "Load Image From Path",
-	"JDC_ImageLoaderMeta": "Load Image From Path With Meta"
+	"JDC_ResizeFactor": "ResizeImageFactor",
+	"JDC_BlendImages": "BlendImages",
+	"JDC_GaussianBlur": "GaussianBlur",
+	"JDC_ImageLoader": "LoadImagePath",
+	"JDC_ImageLoaderMeta": "LoadImagePathMeta",
+	"LatentToRGB": "Latent2RGB",
+ 
 }
