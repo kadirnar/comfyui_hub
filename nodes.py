@@ -11,7 +11,7 @@ from ComfyUI.custom_nodes.comfyui_helpers.noisehub.plasma_noise.node import (
                                                                         
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.advanced_noise.node import MathEncode, LatentGaussianNoise
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.perlin_noise.node import NoisyLatentPerlin
-from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor
+from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor, ImageToContrastMask
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent2rgb.node import LatentToRGB
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.circular_ksampler.node import CircularVAEDecode,CustomKSamplerAdvancedTile
 
@@ -40,6 +40,7 @@ NODE_CLASS_MAPPINGS = {
 	"LatentToRGB": LatentToRGB,
 	"CircularVAEDecode": CircularVAEDecode,
 	"CustomKSamplerAdvancedTile": CustomKSamplerAdvancedTile,
+	"ImageToContrastMask": ImageToContrastMask,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -66,5 +67,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 	"LatentToRGB": "Latent2RGB",
 	"CircularVAEDecode": "CircularVAEDecode",
 	"CustomKSamplerAdvancedTile": "CustomKSamplerAdvancedTile",
+	"ImageToContrastMask": "ImageToContrastMask",
  
 }
