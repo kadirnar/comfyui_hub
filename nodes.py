@@ -14,7 +14,6 @@ from ComfyUI.custom_nodes.comfyui_helpers.noisehub.perlin_noise.node import Nois
 from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor, ImageToContrastMask
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent2rgb.node import LatentToRGB
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.circular_ksampler.node import CircularVAEDecode,CustomKSamplerAdvancedTile
-from ComfyUI.custom_nodes.comfyui_helpers.transformers.clipseg.node import CombineMasks, CLIPSeg
 
 NODE_CLASS_MAPPINGS = {
 	"MathEncode": MathEncode,
@@ -41,8 +40,6 @@ NODE_CLASS_MAPPINGS = {
 	"CircularVAEDecode": CircularVAEDecode,
 	"CustomKSamplerAdvancedTile": CustomKSamplerAdvancedTile,
 	"ImageToContrastMask": ImageToContrastMask,
-	"CombineMasks": CombineMasks,
-	"CLIPSeg": CLIPSeg,
 
 }
 
@@ -71,7 +68,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 	"CircularVAEDecode": "CircularVAEDecode",
 	"CustomKSamplerAdvancedTile": "CustomKSamplerAdvancedTile",
 	"ImageToContrastMask": "ImageToContrastMask",
-	"CombineMasks": "CombineMasks",
-	"CLIPSeg": "CLIPSeg",
  
 }
