@@ -1,25 +1,18 @@
-import os
-import sys
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-
 from ComfyUI.custom_nodes.comfyui_helpers.noisehub.plasma_noise.node import (
     PlasmaNoise, RandNoise, GreyNoise, PinkNoise, BrownNoise, PlasmaSampler,
     PowerImage, ImageContrast, GreyScale, Equalize, AutoContrast, ResizeFactor,
     BlendImages, GaussianBlur, LoadImagePath, LoadImagePathWithMetadata
 )
                                                                         
-from ComfyUI.custom_nodes.comfyui_helpers.noisehub.advanced_noise.node import MathEncode, LatentGaussianNoise
-from ComfyUI.custom_nodes.comfyui_helpers.noisehub.perlin_noise.node import NoisyLatentPerlin
-from ComfyUI.custom_nodes.comfyui_helpers.preprocessing.node import ImageLoaderAndProcessor, ImageToContrastMask
-from ComfyUI.custom_nodes.comfyui_helpers.noisehub.latent2rgb.node import LatentToRGB
-from ComfyUI.custom_nodes.comfyui_helpers.noisehub.circular_ksampler.node import CircularVAEDecode,CustomKSamplerAdvancedTile
+from .noisehub.advanced_noise.node import MathEncode, LatentGaussianNoise
+from .noisehub.perlin_noise.node import NoisyLatentPerlin
+from .noisehub.latent2rgb.node import LatentToRGB
+from .noisehub.circular_ksampler.node import CircularVAEDecode,CustomKSamplerAdvancedTile
 
 NODE_CLASS_MAPPINGS = {
 	"MathEncode": MathEncode,
 	"LatentGaussianNoise": LatentGaussianNoise,
-    "NoisyLatentPerlin": NoisyLatentPerlin,
-    "ImageLoaderAndProcessor": ImageLoaderAndProcessor,
+    	"NoisyLatentPerlin": NoisyLatentPerlin,
 	"JDC_Plasma": PlasmaNoise,
 	"JDC_RandNoise": RandNoise,
 	"JDC_GreyNoise": GreyNoise,
@@ -39,7 +32,6 @@ NODE_CLASS_MAPPINGS = {
 	"LatentToRGB": LatentToRGB,
 	"CircularVAEDecode": CircularVAEDecode,
 	"CustomKSamplerAdvancedTile": CustomKSamplerAdvancedTile,
-	"ImageToContrastMask": ImageToContrastMask,
 
 }
 
