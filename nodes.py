@@ -1,4 +1,4 @@
-from ComfyUI.custom_nodes.comfyui_helpers.noisehub.plasma_noise.node import (
+from .noisehub.plasma_noise.node import (
     PlasmaNoise, RandNoise, GreyNoise, PinkNoise, BrownNoise, PlasmaSampler,
     PowerImage, ImageContrast, GreyScale, Equalize, AutoContrast, ResizeFactor,
     BlendImages, GaussianBlur, LoadImagePath, LoadImagePathWithMetadata
